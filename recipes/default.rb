@@ -109,3 +109,21 @@ script "install_modules" do
   EOH
   creates "#{modules_install_dir}/modules-#{modules_version}"
 end
+
+cookbook_file "#{modules_install_dir}/modules-#{modules_version}/Modules/#{modules_version}/modulefiles/.defaultmodules" do
+  owner "root"
+	group "root"
+	mode 00644
+	action :create_if_missing
+end
+
+template "/etc/profile.d/modules.sh" do
+  owner "root"
+	group "root"
+	mode 00644
+	action :create
+	variables(
+    :modules_home => "#{modules_install_dir}/modules-#{modules_version}",
+		:modules_version => modules_version
+	)
+end
