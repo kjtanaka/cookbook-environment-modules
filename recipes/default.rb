@@ -71,7 +71,7 @@ when "redhat", "centos"
 	              tk
 	              tk-devel]
 when "ubuntu", "debian"
-  packages = %w[build-essential]
+  packages = %w[build-essential tcl tcl-dev tk tk-dev]
 end
 
 packages.each do |pkg|
