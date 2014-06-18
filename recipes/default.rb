@@ -24,7 +24,7 @@ modules_version = node['modules']['version']
 
 case node[:platform]
 when "redhat", "centos"
-  packages = %w[autoconf
+  packages = %w[autoconf 
                 automake
                 binutils
                 bison
