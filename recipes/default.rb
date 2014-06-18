@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+include_recipe 'build-essential'
+
 modules_download_url = node['modules']['download_url']
 modules_source_dir = node['modules']['source_dir']
 modules_install_dir = node['modules']['install_dir']
@@ -24,54 +26,9 @@ modules_version = node['modules']['version']
 
 case node[:platform]
 when "redhat", "centos"
-  packages = %w[autoconf 
-                automake
-                binutils
-                bison
-                flex
-                gcc
-                gcc-c++
-                gdb
-                gettext
-                libtool
-                make
-                pkgconfig
-                redhat-rpm-config
-                rpm-build
-                strace
-                automake14
-                automake15
-                automake16
-                automake17
-                byacc
-                cscope
-                ctags
-                cvs
-                dev86
-                diffstat
-                dogtail
-                doxygen
-                elfutils
-                gcc-gfortran
-                indent
-                ltrace
-                oprofile
-                patchutils
-                pstack
-                python-ldap
-                rcs
-                splint
-                subversion
-                swig
-                systemtap
-                texinfo
-                valgrind
-                tcl
-	              tcl-devel
-	              tk
-	              tk-devel]
+  packages = %w[tcl tcl-devel tk tk-devel]
 when "ubuntu", "debian"
-  packages = %w[build-essential tcl tcl-dev tk tk-dev]
+  packages = %w[tcl tcl-dev tk tk-dev]
 end
 
 packages.each do |pkg|
