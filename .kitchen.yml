@@ -20,8 +20,3 @@ suites:
     run_list:
       - recipe[environment-modules]
     attributes: {}
-  - name: python
-    run_list:
-      - recipe[environment-modules]
-      - recipe[environment-modules::python]
-    attributes: {}
