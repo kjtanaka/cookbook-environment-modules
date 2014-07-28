@@ -20,7 +20,7 @@
 include_recipe 'build-essential'
 
 modules_download_url = node['modules']['download_url']
-modules_source_dir = node['modules']['source_dir']
+modules_download_dir = node['modules']['download_dir']
 modules_install_dir = node['modules']['install_dir']
 modules_version = node['modules']['version']
 
@@ -37,11 +37,11 @@ packages.each do |pkg|
   end
 end
 
-directory modules_source_dir do
+directory modules_download_dir do
   action :create
 end
 
-remote_file "#{modules_source_dir}/modules-#{modules_version}.tar.gz" do
+remote_file "#{modules_download_dir}/modules-#{modules_version}.tar.gz" do
   source modules_download_url
   mode 00644
   owner "root"
@@ -51,14 +51,14 @@ end
 
 execute "untar_modules_tarball" do
   command "tar zxvf modules-#{modules_version}.tar.gz"
-  cwd modules_source_dir
-  creates "#{modules_source_dir}/modules-#{modules_version}"
+  cwd modules_download_dir
+  creates "#{modules_download_dir}/modules-#{modules_version}"
 end
 
 script "install_modules" do
   interpreter "bash"
 	user "root"
-  cwd "#{modules_source_dir}/modules-#{modules_version}"
+  cwd "#{modules_download_dir}/modules-#{modules_version}"
   code <<-EOH
   ./configure --prefix=#{modules_install_dir}/modules-#{modules_version}
   make

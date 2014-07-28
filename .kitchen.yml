@@ -18,5 +18,5 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[environment-modules::default]
+      - recipe[environment-modules]
     attributes: {}
