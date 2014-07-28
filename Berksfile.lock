@@ -1,0 +1,16 @@
+DEPENDENCIES
+  build-essential
+  environment-modules
+    path: .
+    metadata: true
+  python
+    git: https://github.com/kjtanaka/cookbook-python.git
+    revision: ed392be0f12386a9d934c974b448229664f511d2
+
+GRAPH
+  build-essential (2.0.4)
+  environment-modules (0.1.0)
+    build-essential (>= 0.0.0)
+    python (>= 0.0.0)
+  python (0.1.0)
+    build-essential (>= 0.0.0)
