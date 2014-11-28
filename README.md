@@ -6,10 +6,11 @@ Requirements
 ------------
 
 #### cookbooks
+- `apt`
 - `build-essential`
 
 #### platforms
-- CentOS 6.5 is supported and tested.
+- Ubuntu 12.04 and CentOS 6.5 are supported and tested.
 
 Attributes
 ----------

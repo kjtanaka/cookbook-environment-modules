@@ -17,7 +17,6 @@
 # limitations under the License.
 #
 
-include_recipe 'build-essential'
 
 modules_download_url = node['opt-modules']['download_url']
 modules_download_dir = node['opt-modules']['download_dir']
@@ -28,9 +27,11 @@ case node["platform"]
 when "redhat", "centos"
   packages = %w[tcl tcl-devel tk tk-devel]
 when "ubuntu", "debian"
+  include_recipe 'apt'
   packages = %w[tcl tcl-dev tk tk-dev]
 end
 
+include_recipe 'build-essential'
 packages.each do |pkg|
   package pkg do
     action :install

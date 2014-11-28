@@ -14,6 +14,10 @@ platforms:
     driver_plugin: digitalocean
     driver_config:
       image_id: 6372108
+  - name: ubuntu-12.04
+    driver_plugin: digitalocean
+    driver_config:
+      image_id: 6374128
 
 suites:
   - name: default
