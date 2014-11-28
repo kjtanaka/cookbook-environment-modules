@@ -24,7 +24,7 @@ modules_download_dir = node['opt-modules']['download_dir']
 modules_install_dir = node['opt-modules']['install_dir']
 modules_version = node['opt-modules']['version']
 
-case node[:platform]
+case node["platform"]
 when "redhat", "centos"
   packages = %w[tcl tcl-devel tk tk-devel]
 when "ubuntu", "debian"
@@ -82,7 +82,7 @@ template "/etc/profile.d/modules.sh" do
 	mode 00644
 	action :create
 	variables(
-    :modules_home => "#{modules_install_dir}",
+    :modules_home => modules_install_dir,
 		:modules_version => modules_version
 	)
 end
