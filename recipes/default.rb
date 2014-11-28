@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: environment-modules
+# Cookbook Name:: opt-modules
 # Recipe:: default
 #
 # Copyright 2014, FutureGrid, Indiana University
@@ -19,10 +19,10 @@
 
 include_recipe 'build-essential'
 
-modules_download_url = node['modules']['download_url']
-modules_download_dir = node['modules']['download_dir']
-modules_install_dir = node['modules']['install_dir']
-modules_version = node['modules']['version']
+modules_download_url = node['opt-modules']['download_url']
+modules_download_dir = node['opt-modules']['download_dir']
+modules_install_dir = node['opt-modules']['install_dir']
+modules_version = node['opt-modules']['version']
 
 case node[:platform]
 when "redhat", "centos"
@@ -47,12 +47,14 @@ remote_file "#{modules_download_dir}/modules-#{modules_version}.tar.gz" do
   owner "root"
   group "root"
   action :create_if_missing
+  not_if { ::File.exists?("#{modules_install_dir}/Modules/#{modules_version}") }
 end
 
 execute "untar_modules_tarball" do
   command "tar zxvf modules-#{modules_version}.tar.gz"
   cwd modules_download_dir
   creates "#{modules_download_dir}/modules-#{modules_version}"
+  only_if { ::File.exists?("#{modules_download_dir}/modules-#{modules_version}.tar.gz") }
 end
 
 script "install_modules" do
@@ -60,14 +62,14 @@ script "install_modules" do
 	user "root"
   cwd "#{modules_download_dir}/modules-#{modules_version}"
   code <<-EOH
-  ./configure --prefix=#{modules_install_dir}/modules-#{modules_version}
+  ./configure --prefix=#{modules_install_dir}
   make
   make install
   EOH
-  creates "#{modules_install_dir}/modules-#{modules_version}"
+  creates "#{modules_install_dir}/Modules/#{modules_version}"
 end
 
-cookbook_file "#{modules_install_dir}/modules-#{modules_version}/Modules/#{modules_version}/modulefiles/.defaultmodules" do
+cookbook_file "#{modules_install_dir}/Modules/#{modules_version}/modulefiles/.defaultmodules" do
   owner "root"
 	group "root"
 	mode 00644
@@ -80,7 +82,7 @@ template "/etc/profile.d/modules.sh" do
 	mode 00644
 	action :create
 	variables(
-    :modules_home => "#{modules_install_dir}/modules-#{modules_version}",
+    :modules_home => "#{modules_install_dir}",
 		:modules_version => modules_version
 	)
 end
