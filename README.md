@@ -10,7 +10,9 @@ Requirements
 - `build-essential`
 
 #### platforms
-- Ubuntu 12.04 and CentOS 6.5 are supported and tested.
+These OSs are supported and tested.
+- Ubuntu 12.04
+- CentOS 6.5
 
 Attributes
 ----------
