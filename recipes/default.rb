@@ -23,10 +23,10 @@ modules_download_dir = node['opt-modules']['download_dir']
 modules_install_dir = node['opt-modules']['install_dir']
 modules_version = node['opt-modules']['version']
 
-case node["platform"]
-when "redhat", "centos"
+case node["platform_family"]
+when "rhel"
   packages = %w[tcl tcl-devel tk tk-devel]
-when "ubuntu", "debian"
+when "debian"
   include_recipe 'apt'
   packages = %w[tcl tcl-dev tk tk-dev]
 end
