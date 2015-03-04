@@ -56,7 +56,7 @@ end
 
 script "install_modules" do
   interpreter "bash"
-	user "root"
+  user "root"
   cwd "#{modules_download_dir}/modules-#{modules_version}"
   code <<-EOH
   ./configure --prefix=#{modules_install_dir}
@@ -68,18 +68,18 @@ end
 
 cookbook_file "#{modules_install_dir}/Modules/#{modules_version}/modulefiles/.defaultmodules" do
   owner "root"
-	group "root"
-	mode 00644
-	action :create_if_missing
+  group "root"
+  mode 00644
+  action :create_if_missing
 end
 
 template "/etc/profile.d/modules.sh" do
   owner "root"
-	group "root"
-	mode 00644
-	action :create
-	variables(
+  group "root"
+  mode 00644
+  action :create
+  variables(
     :modules_home => modules_install_dir,
-		:modules_version => modules_version
-	)
+    :modules_version => modules_version
+  )
 end
