@@ -8,7 +8,7 @@ provisioner:
   name: chef_solo
 
 platforms:
-  - name: centos-5-10-x64
+  - name: centos-6-5-x64
   - name: ubuntu-12-04-x64
   - name: debian-7-0-x64
 
