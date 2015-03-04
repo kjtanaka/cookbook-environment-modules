@@ -19,13 +19,13 @@ Attributes
 
 #### default
 * `['modules']['version']` - Version of Environment Modules. Default is `3.2.10`.
-* `['modules']['download_url']` - Download URL. Default is http://prdownloads.sourceforge.net/modules/modules-['modules']['version'].tar.gz
+* `['modules']['download_url']` - Download URL. Default is `http://prdownloads.sourceforge.net/modules/modules-['modules']['version'].tar.gz`
 * `['modules']['download_dir']` - Download directory. Default is `/tmp`.
 * `['modules']['install_dir']` - Install directory. Default is `/opt`.
 
 Usage
 -----
-#### environment-modules::default
+#### opt-modules::default
 
 Include `opt-modules` in your node's `run_list` as shown below.
 
